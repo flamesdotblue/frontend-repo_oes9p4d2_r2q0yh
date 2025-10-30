@@ -1,28 +1,54 @@
-import { useState } from 'react'
+import React from 'react';
+import Hero from './components/Hero';
+import Portfolio from './components/Portfolio';
+import Testimonials from './components/Testimonials';
+import Contact from './components/Contact';
 
-function App() {
-  const [count, setCount] = useState(0)
-
+const App = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 flex items-center justify-center">
-      <div className="bg-white p-8 rounded-lg shadow-lg">
-        <h1 className="text-3xl font-bold text-gray-800 mb-4">
-          Vibe Coding Platform
-        </h1>
-        <p className="text-gray-600 mb-6">
-          Your AI-powered development environment
-        </p>
-        <div className="text-center">
-          <button
-            onClick={() => setCount(count + 1)}
-            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
+    <div className="min-h-screen bg-[#0b0f17] text-white">
+      {/* Top bar */}
+      <header className="sticky top-0 z-50 border-b border-white/10 bg-[#0b0f17]/70 backdrop-blur-md">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+          <a href="#home" className="flex items-center gap-2">
+            <div className="h-6 w-6 rounded-lg bg-gradient-to-tr from-cyan-400 to-fuchsia-500" />
+            <span className="text-sm font-semibold tracking-wide">UxThemer</span>
+          </a>
+          <nav className="hidden items-center gap-6 text-sm text-white/80 sm:flex">
+            <a href="#portfolio" className="hover:text-white">Work</a>
+            <a href="#testimonials" className="hover:text-white">Testimonials</a>
+            <a href="#contact" className="hover:text-white">Contact</a>
+          </nav>
+          <a
+            href="#contact"
+            className="hidden rounded-lg bg-cyan-500 px-4 py-2 text-xs font-medium text-white shadow shadow-cyan-500/30 transition hover:bg-cyan-400 sm:block"
           >
-            Count is {count}
-          </button>
+            Book a Demo
+          </a>
         </div>
-      </div>
-    </div>
-  )
-}
+      </header>
 
-export default App
+      <main>
+        <Hero />
+        <Portfolio />
+        <Testimonials />
+        <Contact />
+      </main>
+
+      <footer className="border-t border-white/10">
+        <div className="mx-auto max-w-7xl px-6 py-10">
+          <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
+            <p className="text-sm text-white/60">© {new Date().getFullYear()} UxThemer. All rights reserved.</p>
+            <div className="flex items-center gap-4 text-sm text-white/60">
+              <a href="#portfolio" className="hover:text-white">Portfolio</a>
+              <a href="#testimonials" className="hover:text-white">Testimonials</a>
+              <a href="#contact" className="hover:text-white">Contact</a>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+};
+
+export default App;
