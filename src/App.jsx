@@ -1,10 +1,30 @@
-import React from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import Hero from './components/Hero';
 import Portfolio from './components/Portfolio';
+import Showcase from './components/Showcase';
 import Testimonials from './components/Testimonials';
 import Contact from './components/Contact';
+import CaseStudy from './components/CaseStudy';
+
+const parseHash = () => {
+  const hash = window.location.hash || '';
+  const match = hash.match(/^#case-study\/(.+)$/);
+  return match ? decodeURIComponent(match[1]) : null;
+};
 
 const App = () => {
+  const [caseSlug, setCaseSlug] = useState(parseHash());
+
+  useEffect(() => {
+    const onHashChange = () => setCaseSlug(parseHash());
+    window.addEventListener('hashchange', onHashChange);
+    // Initialize on mount to handle direct links
+    onHashChange();
+    return () => window.removeEventListener('hashchange', onHashChange);
+  }, []);
+
+  const isCaseStudy = useMemo(() => !!caseSlug, [caseSlug]);
+
   return (
     <div className="min-h-screen bg-[#0b0f17] text-white">
       {/* Top bar */}
@@ -16,6 +36,7 @@ const App = () => {
           </a>
           <nav className="hidden items-center gap-6 text-sm text-white/80 sm:flex">
             <a href="#portfolio" className="hover:text-white">Work</a>
+            <a href="#showcase" className="hover:text-white">Screenshots</a>
             <a href="#testimonials" className="hover:text-white">Testimonials</a>
             <a href="#contact" className="hover:text-white">Contact</a>
           </nav>
@@ -30,7 +51,9 @@ const App = () => {
 
       <main>
         <Hero />
+        {isCaseStudy && <CaseStudy slug={caseSlug} />}
         <Portfolio />
+        <Showcase />
         <Testimonials />
         <Contact />
       </main>
@@ -41,6 +64,7 @@ const App = () => {
             <p className="text-sm text-white/60">© {new Date().getFullYear()} UxThemer. All rights reserved.</p>
             <div className="flex items-center gap-4 text-sm text-white/60">
               <a href="#portfolio" className="hover:text-white">Portfolio</a>
+              <a href="#showcase" className="hover:text-white">Screenshots</a>
               <a href="#testimonials" className="hover:text-white">Testimonials</a>
               <a href="#contact" className="hover:text-white">Contact</a>
             </div>

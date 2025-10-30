@@ -3,24 +3,32 @@ import { ArrowRight } from 'lucide-react';
 
 const projects = [
   {
+    slug: 'growth-analytics-dashboard',
     title: 'Growth Analytics Dashboard',
     desc: 'End-to-end product UX with real-time charts and role-based access.',
     tags: ['React', 'Tailwind', 'FastAPI'],
+    palette: 'from-cyan-500/20 via-fuchsia-500/15 to-amber-500/15',
   },
   {
+    slug: 'ai-support-console',
     title: 'AI Support Console',
     desc: 'Conversational triage, knowledge surfacing, and ops tooling.',
     tags: ['Next.js', 'Vector DB', 'OpenAI'],
+    palette: 'from-fuchsia-500/20 via-cyan-500/15 to-indigo-500/15',
   },
   {
+    slug: 'ecommerce-redesign',
     title: 'E‑commerce Redesign',
     desc: 'Modern storefront with blazing-fast product discovery.',
     tags: ['Vite', 'Headless UI', 'Stripe'],
+    palette: 'from-amber-500/20 via-pink-500/15 to-purple-500/15',
   },
   {
+    slug: 'fintech-mobile-web',
     title: 'Fintech Mobile Web',
     desc: 'High-trust flows with delightful micro-interactions.',
     tags: ['React', 'Framer Motion', 'Auth'],
+    palette: 'from-emerald-500/20 via-cyan-500/15 to-blue-500/15',
   },
 ];
 
@@ -43,12 +51,12 @@ const Portfolio = () => {
         </div>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {projects.map((p, i) => (
+          {projects.map((p) => (
             <article
-              key={i}
+              key={p.slug}
               className="group relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-white/10 to-white/[0.06] p-5 transition hover:border-white/20"
             >
-              <div className="h-40 rounded-xl bg-gradient-to-tr from-cyan-500/20 via-fuchsia-500/15 to-amber-500/15" />
+              <div className={`h-40 rounded-xl bg-gradient-to-tr ${p.palette}`} />
               <div className="mt-4">
                 <h3 className="text-lg font-semibold text-white">{p.title}</h3>
                 <p className="mt-1 text-sm text-white/70">{p.desc}</p>
@@ -62,10 +70,13 @@ const Portfolio = () => {
                     </span>
                   ))}
                 </div>
-                <button className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-cyan-300 transition group-hover:text-cyan-200">
+                <a
+                  href={`#case-study/${p.slug}`}
+                  className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-cyan-300 transition hover:text-cyan-200"
+                >
                   View case study
                   <ArrowRight size={16} className="transition-transform group-hover:translate-x-0.5" />
-                </button>
+                </a>
               </div>
               <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity group-hover:opacity-100">
                 <div className="absolute -inset-10 bg-gradient-to-br from-cyan-500/10 via-fuchsia-500/10 to-amber-500/10 blur-2xl" />
